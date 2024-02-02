@@ -158,6 +158,10 @@ pythonCopy code
     }
 }`
 
-1.  Migrate Database: After configuring, run `python manage.py migrate` to apply migrations and set up your Django project's database schema in MySQL.
+### Step X: Apply Migrations
 
-2.  Create Superuser: Optionally, create a Django admin superuser with `python manage.py createsuperuser` to access the Django admin interface.
+After modifying `settings.py`, return to the terminal and make sure your virtual environment is activated. Apply the Django migrations to create the necessary database tables by running:
+
+bashCopy code
+
+`python manage.py migrate`
