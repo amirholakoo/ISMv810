@@ -111,4 +111,53 @@ bashCopy code
 
 1.  Access Admin Site: Go to `http://localhost:8000/admin` and log in with the superuser account you just created.
 
-Congratulations! You've set up a basic Django project on your RPI4. From here, you can start developing your application, defining models, and working on your inventory and sales management system. If you have any questions or need further instructions, feel free to ask!
+
+
+### Step 10: Install MySQL Development Libraries
+
+Run the following command to install the MySQL client development libraries along with other necessary build tools:
+
+bashCopy code
+
+`sudo apt-get install default-libmysqlclient-dev build-essential`
+
+-   `default-libmysqlclient-dev`: This package contains the MySQL client library and development files needed by `mysqlclient`.
+-   `build-essential`: This package installs various packages that are essential for building Debian packages, including `gcc` compiler and `make` tool.
+
+### Step 11: Retry Installing `mysqlclient`
+
+With the necessary development libraries installed, try installing `mysqlclient` again within your virtual environment:
+
+bashCopy code
+
+`pip install mysqlclient`
+
+This command should now successfully install the `mysqlclient` package without the previous errors.
+
+### Additional Steps for Django Database Configuration
+
+After installing `mysqlclient`, you'll need to configure your Django project to use MySQL as its database backend:
+
+1.  Modify `settings.py`: In your Django project's `settings.py` file, you'll find a `DATABASES` setting. Modify it to use MySQL, replacing `'ENGINE': 'django.db.backends.sqlite3',` with `'ENGINE': 'django.db.backends.mysql',`, and set the `NAME`, `USER`, `PASSWORD`, `HOST`, and `PORT` to match your MySQL database configuration.
+
+2.  Example Configuration:
+
+pythonCopy code
+
+`sudo nano ~/myproject/myproject/settings.py`
+
+
+`DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'your_database_name',
+        'USER': 'your_database_user',
+        'PASSWORD': 'your_database_password',
+        'HOST': 'localhost',  # Or an IP address if your database is on a different server
+        'PORT': '3306',  # Default MySQL port
+    }
+}`
+
+1.  Migrate Database: After configuring, run `python manage.py migrate` to apply migrations and set up your Django project's database schema in MySQL.
+
+2.  Create Superuser: Optionally, create a Django admin superuser with `python manage.py createsuperuser` to access the Django admin interface.
