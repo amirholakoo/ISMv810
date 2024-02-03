@@ -165,3 +165,80 @@ After modifying `settings.py`, return to the terminal and make sure your virtual
 bashCopy code
 
 `python manage.py migrate`
+
+
+
+
+### Step 1: Navigate to Your Project Directory
+
+Ensure you're in the correct directory where your Django project is located (`/var/www/html/ISMv810` in your case). If you're not already there, use:
+
+bashCopy code
+
+`cd /var/www/html/ISMv810`
+
+### Step 2: Define Your Model
+
+1.  Open the `models.py` file within your app directory. If we're using the `inventory` app as suggested, the path would be `/var/www/html/ISMv810/inventory/models.py`.
+
+2.  Define a `Product` model by adding the following code to `models.py`:
+
+pythonCopy code
+
+`from django.db import models
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    in_stock = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name`
+
+This code snippet defines a simple `Product` model with a name, description, price, and a Boolean field indicating if it's in stock.
+
+### Step 3: Create and Apply Migrations
+
+After defining your model, you need to create and apply migrations to update your database schema. Ensure you're still in the root directory of your Django project to execute these commands.
+
+1.  Create migrations for your new model:
+
+bashCopy code
+
+`python manage.py makemigrations`
+
+1.  Apply migrations to your database:
+
+bashCopy code
+
+`python manage.py migrate`
+
+These commands analyze the models you've defined, create migration files (which are blueprints for changing your database schema), and then apply these migrations to make the actual schema changes in your database.
+
+### Register Your Model in the Admin Site
+
+### Step 1: Register Your Model in the Admin Site
+
+To manage `Product` objects through the Django admin site, you need to register the model in `admin.py` of your app (`inventory`).
+
+1.  Open `/var/www/html/ISMv810/inventory/admin.py` in a text editor.
+
+2.  Add the following code to register the `Product` model:
+
+pythonCopy code
+
+`from django.contrib import admin
+from .models import Product
+
+admin.site.register(Product)`
+
+### Step 2: Restart the Development Server and Check the Admin Site
+
+If your development server isn't running, start it again with:
+
+bashCopy code
+
+`python manage.py runserver`
+
+Now, when you navigate to `http://localhost:8000/admin` and log in, you should see the `Products` section listed along with `Groups` and `Users`. You can add, edit, or delete product entries using the admin interface.
