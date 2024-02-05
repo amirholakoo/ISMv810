@@ -22,7 +22,7 @@
 
 2.  Defining Models:
 
-    -   Models represent database tables. Define models in `inventory/models.py` for `Anbar`, `Products`, `RawMaterials`, `Movements`, `Consumption`, and any other entities discussed.
+    -   Models represent database tables. Define models in `inventory/models.py` for `Anbar`, `Products`, `RawMaterials`, `Consumption`, and any other entities discussed.
 3.  Database Migrations:
 
    
