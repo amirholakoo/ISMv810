@@ -1,107 +1,82 @@
 ### Step 1: Installing Python
 
-Most Linux distributions come with Python pre-installed. However, to ensure you have the latest version, you can install or update Python using your package manager.
+Django is a Python-based web framework, so the first step is to ensure you have Python installed on your system. Most Linux distributions come with Python pre-installed, but we'll make sure you have a version compatible with the latest Django release.
 
-1.  Open your terminal.
-2.  Update your package list to make sure you get the latest versions of the packages:
+1.  Open a Terminal: Access your terminal through your Linux desktop environment.
 
-    sqlCopy code
+2.  Check Python Installation: Type `python3 --version` into the terminal and press Enter. If you see a version number starting with 3.8 or higher, you're set. If not, or if you get an error message, proceed to install Python.
 
-    `sudo apt update`
-
-3.  Install Python 3 (if it's not installed or you need an updated version):
-
-    Copy code
-
-    `sudo apt install python3`
-
-4.  Verify the installation by checking the Python version:
-
-    cssCopy code
-
-    `python3 --version`
-
-### Step 2: Installing pip
-
-`pip` is the package installer for Python. You can use it to install packages from the Python Package Index (PyPI) and other indexes.
-
-1.  If `pip` is not installed, you can install it by running:
-
-    Copy code
-
-    `sudo apt install python3-pip`
-
-2.  Verify the installation by checking the `pip` version:
-
-    cssCopy code
-
-    `pip3 --version`
-
-### Step 3: Setting Up a Virtual Environment
-
-A virtual environment is a self-contained directory that contains a Python installation for a particular version of Python, plus a number of additional packages. Using a virtual environment allows you to manage dependencies for different projects separately.
-
-1.  Install the `virtualenv` package:
-
-    Copy code
-
-    `pip3 install virtualenv`
-
-2.  Navigate to the directory where you want to set up your Django project. This can be anywhere you have permission to write files, such as your home directory. For example, if you want to work in `~/projects/`:
+3.  Install Python: Run the following command to install Python:
 
     bashCopy code
 
-    `mkdir ~/projects
-    cd ~/projects`
+    `sudo apt update
+    sudo apt install python3 python3-pip python3-venv -y`
 
-3.  Create a new virtual environment for your project:
+    This command updates your package list, installs Python3, pip (Python's package installer), and the package for creating virtual environments.
 
-    Copy code
+### Step 2: Setting Up a Virtual Environment
 
-    `virtualenv inventory_env`
+Using a virtual environment for your Django project is recommended. It allows you to manage project-specific dependencies separately from your global Python installation.
 
-4.  Activate the virtual environment:
-
-    bashCopy code
-
-    `source inventory_env/bin/activate`
-
-    -   Your prompt will change to indicate that you are now working within the virtual environment. It will look something like `(inventory_env) user@hostname:~/projects$`.
-
-### Step 4: Installing Django
-
-With your virtual environment activated, you can install Django using `pip`.
-
-1.  Install Django:
-
-    Copy code
-
-    `pip install django`
-
-2.  Verify the installation by checking the Django version:
-
-    cssCopy code
-
-    `django-admin --version`
-
-### Step 5: Creating Your Django Project
-
-1.  Still within your virtual environment and your preferred project directory, create a new Django project by running:
-
-    Copy code
-
-    `django-admin startproject inventory_management`
-
-2.  Navigate into your project directory:
+1.  Navigate to Your Project Directory: Decide where you want your project to live. For example, if you want it in your home directory under `projects`, you would use:
 
     bashCopy code
 
-    `cd inventory_management`
+    `mkdir -p ~/projects/my_django_project
+    cd ~/projects/my_django_project`
 
-3.  Create a Django app. Let's call it `logistics`:
+2.  Create a Virtual Environment: Run the following command to create a virtual environment named `venv` within your project directory:
 
-    Copy code
+    bashCopy code
+
+    `python3 -m venv venv`
+
+3.  Activate the Virtual Environment: Before you install Django or any other packages, activate your virtual environment:
+
+    bashCopy code
+
+    `source venv/bin/activate`
+
+    Once activated, your terminal prompt should change to indicate that you're now working inside `venv`.
+
+### Step 3: Installing Django
+
+With your virtual environment activated, install Django using pip:
+
+`sudo chown -R admin:admin /var/www/html/ISMv810/venv/`
+
+
+`pip install django`
+
+This command downloads and installs the latest Django version.
+
+### Step 4: Create Your Django Project
+
+1.  Create the Project: With Django installed, you're ready to create your project. Run:
+
+    bashCopy code
+
+    `django-admin startproject inventory_management .`
+
+    The `.` at the end of the command creates the project in the current directory instead of making a new subdirectory.
+
+2.  Start the Development Server: Check if everything is set up correctly by starting Django's development server:
+
+    bashCopy code
+
+    `python manage.py runserver`
+
+3.  Access Your Project: Open a web browser and go to `http://127.0.0.1:8000/`. You should see Django's default welcome page.
+
+### Step 5: Creating Your Django App
+
+Now, let's create a Django app within your project where we'll define our models and views.
+
+1.  Create the App: In your terminal (make sure you're in the project directory and have your virtual environment activated), run:
+
+    bashCopy code
 
     `python manage.py startapp logistics`
 
-Congratulations! You have now set up your environment, installed Django, and created a new Django project with a `logistics` app. This is the foundation upon which we'll build your inventory and sales management system.
+This sets up a basic Django project structure and a dedicated app for handling logistics-related functionality like trucks, shipments, and purchase orders. Your environment is now ready for development!
