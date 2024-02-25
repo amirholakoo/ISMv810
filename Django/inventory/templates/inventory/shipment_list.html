@@ -1,0 +1,14 @@
+<!-- List all shipments -->
+{% extends 'inventory/base.html' %} {% block content %}
+<h2>Shipments</h2>
+<a href="{% url 'shipment-add' %}">Add New Shipment</a>
+<ul>
+  {% for shipment in shipments %}
+  <li>
+    {{ shipment }}
+    <a href="{% url 'shipment-update' shipment.pk %}">Edit</a>
+    <a href="{% url 'shipment-delete' shipment.pk %}">Delete</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
